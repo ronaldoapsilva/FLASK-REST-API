@@ -1,2 +1,2 @@
 stores = {}
-item = {}
+items = {}
