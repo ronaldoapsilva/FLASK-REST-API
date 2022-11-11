@@ -37,7 +37,7 @@ class Store(MethodView):
         store_data = request.get_json()
 
         for store in stores.values():
-            if store['name'] == store['name']:
+            if store_data['name'] == store['name']:
                 abort(400, message='Store already exists.')
 
         store_id = uuid.uuid4().hex
