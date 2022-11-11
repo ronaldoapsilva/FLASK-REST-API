@@ -1,0 +1,18 @@
+ignore-paths:
+  - build
+  - dist
+  - .venv
+
+pylint:
+  disable:
+    - django-not-available
+    - protected-access
+    - consider-using-f-string
+    - arguments-differ
+
+pycodestyle:
+  disable:
+    E101
+    N817
+  options:
+    max-line-length: 79
