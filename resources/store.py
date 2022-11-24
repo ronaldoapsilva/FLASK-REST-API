@@ -2,7 +2,7 @@ import uuid
 from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 from db import db
 from models import StoreModel
@@ -15,17 +15,13 @@ blp = Blueprint('Stores', __name__, description='Operations on stores')
 class Store(MethodView):
     @blp.response(200, StoreSchema)
     def get(self, store_id):
-        try:
-            return stores[store_id]
-        except KeyError:
-            return abort(404, message='Store not found.')
+        store = StoreModel.query.get_or_404(store_id)
+        return store
 
     def delete(self, store_id):
-        try:
-            del stores[store_id]
-            return {'message': 'Store deleted.'}
-        except KeyError:
-            return abort(404, message='Store not found.')
+        store = StoreModel.query.get_or_404(store_id)
+        raise NotImplementedError("Deleting a store is not implemented.")
+
 
 
 @blp.route('/store')
@@ -42,6 +38,14 @@ class Store(MethodView):
         try:
             db.session.add(store)
             db.session.commit()
+        except IntegrityError:
+            abort(
+                400,
+                message="A store with that name already exists."
+                )
         except SQLAlchemyError:
-            abort(500, message="An error occurred while inserting the store.")
+            abort(
+                500,
+                message="An error occurred while inserting the store."
+                )
         return store
