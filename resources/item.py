@@ -1,4 +1,3 @@
-import uuid
 from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
@@ -8,7 +7,7 @@ from db import db
 from models import ItemModel
 from schemas import ItemSchema, ItemUpdateSchema
 
-blp = Blueprint("Items", __name__, description="Operations on items")
+blp = Blueprint("Items", "items", description="Operations on items")
 
 
 @blp.route("/item/<string:item_id>")
