@@ -5,7 +5,7 @@ WORKDIR /app
 # because it will be cached if there is not update to them
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir --upgrage -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN pip install gunicorn
 
 COPY . .
