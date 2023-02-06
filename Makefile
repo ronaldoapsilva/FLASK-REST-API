@@ -2,7 +2,7 @@ docker_build:
 	docker build -t rest-apis-flask-python .
 
 docker_run:
-	docker run -p 5005:5000 --name rest-apis faaf6434
+	docker run -p 5000:80 --name rest-apis 1cb0a3df82f1955fb184fa9d3711452b745c987ee7615626e343be228ba95fc3
 
 docker_run_bg:
 	docker run -dp 5005:5000 rest-apis-flask-python

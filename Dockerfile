@@ -9,4 +9,5 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN pip install gunicorn
 
 COPY . .
+
 CMD ["/bin/bash", "docker-entrypoint.sh"]
