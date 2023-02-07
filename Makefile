@@ -7,6 +7,9 @@ docker_run:
 docker_run_sh:
 	docker run -p 5000:5000 -w /app -v "%cd%:/app" rest-apis-flask-python sh -c "flask run --host 0.0.0.0"
 
+docker_run_rq:
+	docker run -w /app rest-apis-flask-python sh -c "rq worker -u rediss://red-cfgsk0pa6gdvgkku225g:0sRuA02F0xOi4itmjjnX6QbuYGzLxqZe@oregon-redis.render.com:6379 emails"
+
 docker_run_bg:
 	docker run -dp 5005:5000 rest-apis-flask-python
 
